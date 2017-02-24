@@ -190,3 +190,42 @@ int memecrypto_verify(unsigned char *input, unsigned char *output, int len)
 
     return 0;
 }
+
+void reverseCrypt(unsigned char input[], unsigned char output[]) {
+	unsigned char enc[0x60];
+	memcpy(enc, &input[0x20], 0x60);
+	
+	unsigned char keybuf[PUBKEYDER_LEN + 0x20];
+	memcpy(keybuf, pubkeyder, PUBKEYDER_LEN);
+	memcpy(&keybuf[PUBKEYDER_LEN], input, 0x20);
+	
+	unsigned char hash[0x14];
+	unsigned char key[0x10];
+	sha1(hash, keybuf, 0x20 + PUBKEYDER_LEN);
+	memcpy(key, hash, 0x10);
+	
+	unsigned char RSA[RSA_BYTES];
+	rsa_encrypt(enc, RSA);
+	unsigned char dec[0x80];
+	memecrypto_aes_decrypt(RSA, dec, key);
+
+	unsigned char temp1[0x8];
+	unsigned char temp2[0x8];
+	sha1(hash, dec, 0x80);
+	memcpy(temp1, hash, 0x8);
+	memcpy(temp2, &dec[0x58], 0x8);
+	if (!memcmp(temp1, temp2, 0x8)) {
+		memcpy(output, dec, 0x80);
+		return;
+	}
+	
+	RSA[0] |= 0x80;
+	memecrypto_aes_decrypt(RSA, dec, key);
+	sha1(hash, dec, 0x80);
+	memcpy(temp1, hash, 0x8);
+	memcpy(temp2, &dec[0x58], 0x8);
+	if (!memcmp(temp1, temp2, 0x8)) {
+		memcpy(output, dec, 0x80);
+		return;
+	}
+}

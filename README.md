@@ -1,8 +1,4 @@
-# memecrypto_test
-
-![memecrypto](http://i.imgur.com/s1lVrnG.png)
-
-3ds homebrew test for a C implementation of Pokemon Sun/Moon's memecrypto.
+# memecrypto by @SciresM
 
 **Dependencies:**
 

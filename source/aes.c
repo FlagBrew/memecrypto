@@ -579,5 +579,3 @@ void AES128_CBC_decrypt_buffer(uint8_t* output, uint8_t* input, uint32_t length,
 
 
 #endif // #if defined(CBC) && CBC
-
-
