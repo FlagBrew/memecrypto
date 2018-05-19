@@ -34,10 +34,9 @@ void rsa_decrypt(unsigned char *input, unsigned char *output)
     
     mpz_powm(out_mpz, in_mpz, D, N);
     
-    
     mpz_export(buf, &outlen, 1, 1, 1, 0, out_mpz);
     
-    for (int i = 0; i < RSA_BYTES - outlen; i++)
+    for (unsigned int i = 0; i < RSA_BYTES - outlen; i++)
     {
         output[i] = 0x00;
     }
@@ -58,10 +57,9 @@ void rsa_encrypt(unsigned char *input, unsigned char *output)
     
     mpz_powm_ui(out_mpz, in_mpz, 0x10001, N);
     
-    
     mpz_export(buf, &outlen, 1, 1, 1, 0, out_mpz);
     
-    for (int i = 0; i < RSA_BYTES - outlen; i++)
+    for (unsigned int i = 0; i < RSA_BYTES - outlen; i++)
     {
         output[i] = 0x00;
     }

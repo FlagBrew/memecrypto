@@ -10,5 +10,5 @@ RSA implementation based on [mini-gmp](https://gmplib.org/)
 
 **Licensing:**
 
-This software is licensed under the terms of the GPLv3.  
+This software is licensed under the terms of the GPLv3.
 You can find a copy of the license in the LICENSE file.
