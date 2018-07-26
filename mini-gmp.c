@@ -267,7 +267,6 @@ static void *
 gmp_default_realloc (void *old, size_t old_size, size_t new_size)
 {
   (void)old_size;
-
   void * p;
 
   p = realloc (old, new_size);
@@ -282,7 +281,6 @@ static void
 gmp_default_free (void *p, size_t size)
 {
   (void)size;
-  
   free (p);
 }
 
