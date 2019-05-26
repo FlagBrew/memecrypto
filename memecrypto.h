@@ -1,6 +1,10 @@
 #ifndef _MEMECRYPTO_H_
 #define _MEMECRYPTO_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <string.h>
 #include "aes.h"
 #include "rsa.h"
@@ -15,5 +19,9 @@ int memecrypto_sign(unsigned char *input, unsigned char *output, int len);
 int memecrypto_verify(unsigned char *input, unsigned char *output, int len);
 
 void reverseCrypt(unsigned char *input, unsigned char *output);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //_MEMECRYPTO_H_
